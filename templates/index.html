@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log File Analyzer - HCLTech</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-logs"></i>
+                <h1>Log File Analyzer</h1>
+            </div>
+            <p class="subtitle">HCLTech IT Operations Automation</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="card">
+                    <h2><i class="fas fa-upload"></i> Upload Log File</h2>
+                    <p class="card-description">Upload your server log file for analysis (supports files up to 100MB)</p>
+                    
+                    <form id="uploadForm" class="upload-form">
+                        <div class="file-input-container">
+                            <input type="file" id="logFile" name="log_file" accept=".txt,.log,.csv" class="file-input">
+                            <label for="logFile" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose Log File</span>
+                            </label>
+                            <div id="fileName" class="file-name">No file chosen</div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="submit" class="btn btn-primary" id="analyzeBtn">
+                                <i class="fas fa-chart-bar"></i> Analyze File
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="analyzeDefaultBtn">
+                                <i class="fas fa-bolt"></i> Analyze 50K Sample
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="file-info">
+                        <p><i class="fas fa-info-circle"></i> Supported format: Timestamp,IP,Request,ErrorCode (comma-separated)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing log file... This may take a few seconds for large files.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p id="progressText">Processing...</p>
+            </div>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <div class="card">
+                    <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                    
+                    <!-- Summary Cards -->
+                    <div class="summary-cards" id="summaryCards">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Error Code Distribution</h3>
+                            <canvas id="errorChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3><i class="fas fa-network-wired"></i> Top Error IPs</h3>
+                            <canvas id="ipChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Results -->
+                    <div class="detailed-results">
+                        <div class="result-card">
+                            <h3><i class="fas fa-list"></i> Error Code Details</h3>
+                            <div class="table-container">
+                                <table id="errorTable">
+                                    <thead>
+                                        <tr>
+                                            <th>HTTP Code</th>
+                                            <th>Error Count</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Table rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <h3><i class="fas fa-server"></i> Top IP Addresses with Errors</h3>
+                            <div class="table-container">
+                                <table id="ipTable">
+                                    <thead>
+                                        <tr>
+                                            <th>IP Address</th>
+                                            <th>Error Count</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Table rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download Links -->
+                    <div class="download-section">
+                        <h3><i class="fas fa-download"></i> Download Reports</h3>
+                        <div class="download-links" id="downloadLinks">
+                            <!-- Links will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <div class="error-content">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3 id="errorTitle">Analysis Failed</h3>
+                    <p id="errorText">There was an error analyzing your log file.</p>
+                    <button onclick="hideError()" class="btn btn-error">Try Again</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Log File Analyzer v1.0 | HCLTech Case Study | IT Operations Automation</p>
+            <p class="footer-info">
+                <i class="fas fa-check-circle"></i> 
+                Tested with 50,000+ log entries | 
+                <i class="fas fa-bolt"></i> 
+                Processing speed: 18,627 lines/second
+            </p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

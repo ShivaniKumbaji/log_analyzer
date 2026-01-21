@@ -1,0 +1,54 @@
+============================================================
+LOG FILE ANALYSIS REPORT
+============================================================
+Generated: 2026-01-21 11:59:14
+
+FILE STATISTICS
+----------------------------------------
+Total Lines Read: 50000
+Valid Lines: 50000
+Skipped Lines: 0
+Successfully Parsed: 48983
+Failed to Parse: 1017
+Success Rate: 97.97%
+
+ANALYSIS SUMMARY
+----------------------------------------
+Total Requests: 48983
+Error Requests: 30944
+Success Requests: 18039
+Error Rate: 63.17%
+Unique IP Addresses: 100
+Unique IPs with Errors: 100
+
+ERROR CODE DISTRIBUTION
+----------------------------------------
+HTTP 400: 4457 errors
+HTTP 401: 4458 errors
+HTTP 403: 4376 errors
+HTTP 404: 4438 errors
+HTTP 500: 4510 errors
+HTTP 502: 4315 errors
+HTTP 503: 4390 errors
+
+TOP IP ADDRESSES WITH ERRORS
+----------------------------------------
+192.168.155.10: 383 errors
+192.168.110.116: 349 errors
+192.168.86.193: 346 errors
+192.168.142.109: 346 errors
+192.168.176.123: 345 errors
+
+REQUEST TYPE DISTRIBUTION
+----------------------------------------
+PUT: 7111 requests
+DELETE: 7079 requests
+OPTIONS: 7037 requests
+POST: 7030 requests
+HEAD: 6941 requests
+GET: 6896 requests
+PATCH: 6889 requests
+
+============================================================
+END OF REPORT
+============================================================
